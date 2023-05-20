@@ -3,7 +3,9 @@
 
 import { RouterLink } from 'vue-router';
 import { useGetData } from '@/composables/getData'
+import { useCounterStore } from '@/store/counter';
 
+const useCounter = useCounterStore()
 const { data, getData, loading, error } = useGetData()
 
 
@@ -16,8 +18,18 @@ getData('https://pokeapi.co/api/v2/pokemon');
 
 <template>
     <h1>Pokemons</h1>
-    <p v-if="loading">Cargando informacion...</p>
 
+    <!-- con esto demuestro que el estado se mantiene desde pinia incrementando en cualquier lugar 
+    y veo desde cualquier componente -->
+    <p v-if="loading">Cargando informacion...</p>
+  <!-- accedo al estado de counter -->
+  <h1>Home counter: {{ useCounter.count }}</h1>
+
+  <!-- accedo al double donde la propiedad comptutada multiplica por dos-->
+  <h2>Double: {{ useCounter.double }}</h2>
+
+  <!-- uso el metodo de incrementar de pinia -->
+  <button @click="useCounter.increment">increment</button>
     <div class="alert alert-danger mt-2" v-if="error">{{ error }}</div>
     <div v-if="data">
         <ul class="list-group">

@@ -1,22 +1,47 @@
+import { computed, ref } from "@vue/reactivity";
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("counter", {
-  state: () => ({
-    count: 0,
-    // mensaje: 0,
-  }),
 
-  actions: {
-    increment() {
-      this.count ++;
-    },
-  },
+// pinia con composition api
+export const useCounterStore = defineStore("counter", ()=> {
+ 
+  const count = ref(0)
 
-  getters: {
+  const increment = () => {
+    count.value ++;
+  }
 
-    double: (state) => state.count * 2,
+  const double = computed(()=> count.value * 2)
 
+
+  return {
+    count, 
+    increment,
+    double
   }
 }); 
+
+
+// pina con api de opciones
+// export const useCounterStore = defineStore("counter", {
+//   state: () => ({
+//     count: 0,
+//     // mensaje: 0,
+//   }),
+
+//   // metodos
+//   actions: {
+//     increment() {
+//       this.count ++;
+//     },
+//   },
+
+//   // computadas
+//   getters: {
+
+//     double: (state) => state.count * 2,
+
+//   }
+// }); 
 
 

@@ -27,6 +27,12 @@ const router = createRouter({
     },
     {
       // lo que sea los params es lo que podre poner en route.params.name
+      path: '/favoritos',
+      name: 'favoritos', 
+      component: () => import('../views/FavoritosView.vue')
+    },
+    {
+      // lo que sea los params es lo que podre poner en route.params.name
       path: '/:patMatch(.*)*',
       name: 'NotFound', 
       component: () => import('../views/NotFoundView.vue')
