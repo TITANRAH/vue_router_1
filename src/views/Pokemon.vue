@@ -8,7 +8,7 @@ import { useFavoritosStore } from '@/store/favoritos';
 
 const useFavoritos = useFavoritosStore()
 
-const {add} = useFavoritos;
+const {add, findPoke} = useFavoritos;
 // con esto accedo a los parametros que vienen desde pokemon views
 const route = useRoute();
 
@@ -35,7 +35,7 @@ getData(`http://pokeapi.co/api/v2/pokemon/${route.params.name}`)
    <div v-if="data">
       <img :src="data.sprites?.front_default" alt="">
       <h1>Poke name: {{ $route.params.name }}</h1>
-      <button class="btn btn-primary mt-2 mb-2" @click="add(data)">Agregar Favorito</button>
+      <button :disabled="findPoke(data.name)" class="btn btn-primary mt-2 mb-2" @click="add(data)">Agregar Favorito</button>
    </div>
    <button class="btn btn-outline-primary" @click="back">Volver</button>
 </template>

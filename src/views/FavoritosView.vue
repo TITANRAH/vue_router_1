@@ -1,9 +1,14 @@
 <script setup>
 import { useFavoritosStore } from '@/store/favoritos';
-import { storeToRefs} from 'pinia'
+import { storeToRefs } from 'pinia'
+import { RouterLink } from 'vue-router';
+
 
 const useFavoritos = useFavoritosStore()
-const {favoritos} = storeToRefs(useFavoritos)
+
+// esto no se usa para metodos solo para propiedades computadas y reactivos ref
+const { favoritos } = storeToRefs(useFavoritos)
+const { remove } = useFavoritos
 
 </script>
 <template>
@@ -14,12 +19,16 @@ const {favoritos} = storeToRefs(useFavoritos)
         <p v-if="favoritos.length === 0">Sin favoritos</p>
         <ul v-else class="list-group">
 
-            <li 
-                v-for="pokeadd in favoritos" 
-                :key="pokeadd.id" 
-                class="list-group-item"
-                >
-                {{ pokeadd.name }}
+            <li v-for="pokeadd in favoritos" :key="pokeadd.id" class="list-group-item">
+
+                <div>
+
+                    {{ pokeadd.name }}
+                </div>
+                <div>
+                    <button  @click="remove(pokeadd.id)"  class="btn btn-sm btn-danger">eliminar</button>
+                    <router-link class="btn btn-sm btn-primary ml-2" :to="`/pokemons/${pokeadd.name}`">Más información</router-link>
+                </div>
             </li>
         </ul>
     </div>
