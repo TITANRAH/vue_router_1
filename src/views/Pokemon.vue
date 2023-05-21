@@ -37,5 +37,5 @@ getData(`http://pokeapi.co/api/v2/pokemon/${route.params.name}`)
       <h1>Poke name: {{ $route.params.name }}</h1>
       <button :disabled="findPoke(data.name)" class="btn btn-primary mt-2 mb-2" @click="add(data)">Agregar Favorito</button>
    </div>
-   <button class="btn btn-outline-primary" @click="back">Volver</button>
+   <button class="btn btn-outline-primary" @click="back">Volve</button>
 </template>
